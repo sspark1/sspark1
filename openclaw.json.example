@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.1.29"
+  },
+  "auth": {
+    "profiles": {
+      "google-antigravity": {
+        "provider": "google-antigravity",
+        "mode": "oauth",
+        "email": "USER_EMAIL_HERE"
+      },
+      "ollama:manual": {
+        "provider": "ollama",
+        "mode": "token"
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "fallbacks": [
+          "ollama/qwen3-coder:30b",
+          "ollama/qwen3:30b-a3b-instruct-2507-q4_K_M"
+        ],
+        "primary": "google-antigravity/gemini-3-flash"
+      },
+      "models": {
+        "google-antigravity/gemini-3-pro-high": {},
+        "ollama/qwen3-coder:30b": {},
+        "ollama/qwen3:30b-a3b-instruct-2507-q4_K_M": {},
+        "google-antigravity/gemini-3-flash": {}
+      }
+    }
+  },
+  "channels": {
+    "discord": {
+      "enabled": true,
+      "token": "YOUR_DISCORD_BOT_TOKEN_HERE",
+      "groupPolicy": "allowlist",
+      "guilds": {
+        "*": {
+          "channels": {
+            "bot": {
+              "allow": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "auth": {
+      "mode": "token",
+      "token": "YOUR_GATEWAY_TOKEN_HERE"
+    }
+  }
+}

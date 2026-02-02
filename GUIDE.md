@@ -110,3 +110,20 @@ OpenClaw의 소스 코드는 다음 경로에 클론되어 있습니다.
 - 경로: `Projects/02_openclaw/openclaw`
 
 추가적인 개발이나 기여를 원하시면 해당 폴더 내의 `README.md`를 참고하세요.
+
+## 7. 문제 해결 및 패치 내역 (Troubleshooting & Patches)
+
+안정적인 운영을 위해 다음 두 가지 시스템 패치가 적용되었습니다.
+
+### 7.1. Google 인증 갱신 오류 해결 (Fixed)
+- **증상**: 1시간마다 봇이 응답을 멈춤 (Token Expired)
+- **원인**: 토큰 갱신 시 `User-Agent` 헤더 누락으로 Google 서버가 요청 차단
+- **패치**: `openclaw` 내부 OAuth 모듈(`google-antigravity.js`)에 `User-Agent: antigravity/1.15.8` 헤더 강제 주입
+
+### 7.2. Discord 연결 로그 안정화 (Fixed)
+- **증상**: 로그에 `WebSocket connection closed (code 1005/1006)` 에러가 빈번하게 발생
+- **원인**: 모바일 환경 등에서 인터넷 연결이 일시적으로 변경될 때 발생하는 자연스러운 현상이나, 로그가 너무 시끄러움
+- **패치**: `gateway-logging.js`를 수정하여 1005, 1006 코드는 로그아웃하지 않고 조용히 재접속하도록 변경
+
+---
+**유지보수 참고**: `npm install -g openclaw`로 업데이트 시 위 패치 내용이 초기화될 수 있습니다. 문제 재발 시 동일하게 수정이 필요합니다.

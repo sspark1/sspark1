@@ -125,5 +125,27 @@ OpenClaw의 소스 코드는 다음 경로에 클론되어 있습니다.
 - **원인**: 모바일 환경 등에서 인터넷 연결이 일시적으로 변경될 때 발생하는 자연스러운 현상이나, 로그가 너무 시끄러움
 - **패치**: `gateway-logging.js`를 수정하여 1005, 1006 코드는 로그아웃하지 않고 조용히 재접속하도록 변경
 
+## 8. YouTube 음성 인식 (YouTube Transcription)
+
+OpenClaw를 사용하여 YouTube 영상의 오디오를 다운로드하고, 텍스트로 변환(Transcription)할 수 있습니다.
+
+### 8.1. 필요 도구 설치 (Extensions)
+이 기능을 사용하기 위해 다음 도구들이 설치되었습니다:
+1.  **yt-dlp**: YouTube 영상/음원 다운로더 (경로: `/opt/homebrew/bin/yt-dlp`)
+2.  **openai-whisper**: AI 음성 인식 모델 (경로: `~/.local/bin/whisper`)
+3.  **ffmpeg**: 오디오 변환 도구 (기본 설치됨)
+
+### 8.2. 사용 방법
+Discord나 터미널에서 OpenClaw에게 다음과 같이 명령합니다:
+
+**1단계: YouTube 오디오 다운로드**
+> "Download audio from [YouTube URL]"
+> (예: "Download audio from https://youtu.be/example123") -> 결과로 파일명이 나옴 (예: `video123.m4a`)
+
+**2단계: 음성 텍스트 변환 (Mac M4 최적화)**
+> "Transcribe video123.m4a with turbo model using mps"
+> (또는 간단히: "Transcribe video123.m4a") - 기본값으로 `turbo` + `mps`가 설정됨
+
 ---
 **유지보수 참고**: `npm install -g openclaw`로 업데이트 시 위 패치 내용이 초기화될 수 있습니다. 문제 재발 시 동일하게 수정이 필요합니다.
+
